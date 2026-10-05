@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Activity, Brain, Shield, Sparkles, ChevronLeft, ChevronRight, HeartPulse, Stethoscope } from "lucide-react";
+import { ArrowRight, Activity, Brain, Shield, Sparkles, ChevronLeft, ChevronRight, HeartPulse, Stethoscope, Lock } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -8,7 +8,7 @@ const platforms = [
   { 
     id: "physio", 
     title: "PhysioAI", 
-    desc: "Autonomous physical therapist with 3D kinematics and voice coaching.", 
+    desc: "Autonomous physical therapist with 3D kinematics and voice coaching", 
     icon: Activity, 
     color: "text-brand",
     bg: "bg-brand-light",
@@ -17,7 +17,7 @@ const platforms = [
   { 
     id: "snowie", 
     title: "Snowie", 
-    desc: "AI-driven behavioral tracking for neurodevelopmental care and autism.", 
+    desc: "AI-driven behavioral tracking for neurodevelopmental care and autism", 
     icon: Brain, 
     color: "text-purple-500",
     bg: "bg-purple-50",
@@ -96,25 +96,25 @@ export default function Home() {
         <div className="container relative mx-auto px-6 text-center max-w-5xl">
           <div className="inline-flex items-center space-x-2 bg-white border border-brand-border rounded-full px-4 py-1.5 mb-8 shadow-sm">
             <Sparkles className="w-4 h-4 text-brand-accent" />
-            <span className="text-sm font-medium text-brand-muted">Next-Generation AI Health Platforms</span>
+            <span className="text-sm font-medium text-brand-muted">AI-Assisted Rehabilitation Platform</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-tight text-brand-dark">
-            Intelligent Care,<br />
+            Smarter Rehabilitation,<br />
             <span className="text-brand">
-              Beyond Human Limits.
+              Better Progress
             </span>
           </h1>
           <p className="text-lg md:text-xl text-brand-muted max-w-3xl mx-auto mb-12 leading-relaxed">
-            Unifying autonomous physical rehabilitation and behavioral therapy through advanced computer vision, biomechanical analysis, and real-time AI telemetry.
+            A unified platform for child rehabilitation and physical therapy, combining guided activities, movement analysis, and meaningful progress tracking
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <button className="w-full sm:w-auto px-8 py-4 btn-primary font-semibold flex items-center justify-center">
-              Explore Solutions
+            <Link href="#solutions" className="w-full sm:w-auto px-8 py-4 btn-primary font-semibold flex items-center justify-center">
+              Explore Rehabilitation
               <ArrowRight className="w-5 h-5 ml-2" />
-            </button>
-            <button className="w-full sm:w-auto px-8 py-4 btn-secondary font-semibold">
-              View Documentation
-            </button>
+            </Link>
+            <Link href="/how-it-works" className="w-full sm:w-auto px-8 py-4 btn-secondary font-semibold flex items-center justify-center">
+              How it works
+            </Link>
           </div>
         </div>
       </section>
@@ -124,7 +124,7 @@ export default function Home() {
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 text-brand-dark">Integrated Platform Suite</h2>
-            <p className="text-brand-muted">A unified ecosystem of specialized health tech modules.</p>
+            <p className="text-brand-muted">A unified ecosystem of specialized health tech modules</p>
           </div>
 
           <div className="relative w-full max-w-5xl mx-auto h-[350px] flex items-center justify-center">
@@ -177,12 +177,15 @@ export default function Home() {
                         </p>
                       </>
                     ) : (
-                      <div className="flex flex-col items-center justify-center space-y-4 opacity-50 w-full mt-2">
-                        <div className="h-5 w-1/2 bg-slate-200 rounded-full animate-pulse"></div>
-                        <div className="space-y-2 w-full flex flex-col items-center">
-                          <div className="h-3 w-4/5 bg-slate-100 rounded-full animate-pulse"></div>
-                          <div className="h-3 w-3/5 bg-slate-100 rounded-full animate-pulse"></div>
+                      <div className="flex flex-col items-center justify-center space-y-2 mt-2 opacity-60">
+                        <div className="flex items-center text-slate-500 font-semibold mb-1">
+                          <Lock className="w-4 h-4 mr-1.5" />
+                          <span>Locked</span>
                         </div>
+                        <h3 className="text-xl font-bold text-slate-700">Coming Soon</h3>
+                        <p className="text-sm text-slate-500 leading-relaxed">
+                          This module will be available in a future update
+                        </p>
                       </div>
                     )}
                     
@@ -215,7 +218,7 @@ export default function Home() {
         <div className="container relative mx-auto px-6 max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 text-brand-dark">Powered by Edge AI</h2>
-            <p className="text-brand-muted">Zero-latency computer vision and real-time behavioral telemetry.</p>
+            <p className="text-brand-muted">Zero-latency computer vision and real-time behavioral telemetry</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -225,7 +228,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-bold mb-3 text-brand-dark">3D Skeletal Tracking</h4>
               <p className="text-sm text-brand-muted">
-                Utilizing MediaPipe for 33-point pose estimation with sub-50ms latency directly on the edge.
+                Utilizing MediaPipe for 33-point pose estimation with sub-50ms latency directly on the edge
               </p>
             </div>
             <div className="glass-light p-6 flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
@@ -234,7 +237,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-bold mb-3 text-brand-dark">Generative AI Reports</h4>
               <p className="text-sm text-brand-muted">
-                AWS Bedrock & Claude LLM synthesize raw telemetry into clinical-grade progression reports.
+                AWS Bedrock & Claude LLM synthesize raw telemetry into clinical-grade progression reports
               </p>
             </div>
             <div className="glass-light p-6 flex flex-col items-start hover:-translate-y-1 transition-transform duration-300">
@@ -243,7 +246,7 @@ export default function Home() {
               </div>
               <h4 className="text-xl font-bold mb-3 text-brand-dark">WebSocket Telemetry</h4>
               <p className="text-sm text-brand-muted">
-                High-frequency bi-directional streams for real-time difficulty adaptation and live parent monitoring.
+                High-frequency bi-directional streams for real-time difficulty adaptation and live parent monitoring
               </p>
             </div>
           </div>
