@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+*.db
+.DS_Store
+.env
+sih-key.pem
+public_ip.txt
+s3_bucket.txt
+cors.json
+sih-key.pem
+public_ip.txt
+s3_bucket.txt
+cors.json
