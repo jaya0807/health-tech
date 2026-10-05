@@ -1,4 +1,4 @@
-import { ArrowLeft, Activity, Brain, Shield, Sparkles, HeartPulse, Stethoscope, Cpu, Database, Network } from "lucide-react";
+import { ArrowLeft, Activity, Brain, Shield, Sparkles, HeartPulse, Stethoscope, Cpu, Database, Network, Lock } from "lucide-react";
 import Link from "next/link";
 
 export default function HowItWorks() {
@@ -98,89 +98,68 @@ export default function HowItWorks() {
             </div>
           </div>
 
-          {/* Module 3: NeuroConnect */}
+          {/* Module 3: Placeholder */}
           <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="flex-1 space-y-6">
-              <div className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-100 rounded-full px-3 py-1">
-                <Shield className="w-4 h-4 text-blue-500" />
-                <span className="text-xs font-bold text-blue-600 uppercase tracking-wider">Module 03</span>
+            <div className="flex-1 space-y-6 opacity-60">
+              <div className="inline-flex items-center space-x-2 bg-slate-100 border border-slate-200 rounded-full px-3 py-1">
+                <Shield className="w-4 h-4 text-slate-500" />
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 03</span>
               </div>
-              <h2 className="text-3xl font-bold text-brand-dark">NeuroConnect: Telehealth Bridge</h2>
-              <p className="text-brand-muted leading-relaxed">
-                A secure, low-latency WebSocket and WebRTC infrastructure that links the patient's Edge AI telemetry directly to a clinician's dashboard in real-time.
+              <div className="flex items-center space-x-3 text-slate-500">
+                <Lock className="w-6 h-6" />
+                <h2 className="text-3xl font-bold text-slate-700">Locked</h2>
+              </div>
+              <p className="text-slate-500 leading-relaxed max-w-md">
+                This module will be available in a future update.
               </p>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <Network className="w-5 h-5 text-blue-500 mt-1 mr-3 flex-shrink-0" />
-                  <p className="text-sm text-brand-dark"><strong>Encrypted Streams:</strong> End-to-end encrypted bi-directional streams for live video and data telemetry.</p>
-                </li>
-                <li className="flex items-start">
-                  <Shield className="w-5 h-5 text-blue-500 mt-1 mr-3 flex-shrink-0" />
-                  <p className="text-sm text-brand-dark"><strong>EMR Integration:</strong> Seamlessly exports session data via FHIR standards to existing hospital records.</p>
-                </li>
-              </ul>
             </div>
             <div className="flex-1 w-full">
-              <div className="glass-panel h-72 w-full rounded-2xl flex items-center justify-center bg-gradient-to-br from-blue-50 to-white">
-                 <Shield className="w-24 h-24 text-blue-500 opacity-20" />
+              <div className="glass-panel h-72 w-full rounded-2xl flex items-center justify-center bg-gradient-to-br from-slate-50 to-white">
+                 <Shield className="w-24 h-24 text-slate-400 opacity-20" />
               </div>
             </div>
           </div>
 
-          {/* Module 4: VitalSync */}
+          {/* Module 4: Placeholder */}
           <div className="flex flex-col md:flex-row-reverse items-center gap-12">
-            <div className="flex-1 space-y-6">
-              <div className="inline-flex items-center space-x-2 bg-rose-50 border border-rose-100 rounded-full px-3 py-1">
-                <HeartPulse className="w-4 h-4 text-rose-500" />
-                <span className="text-xs font-bold text-rose-600 uppercase tracking-wider">Module 04</span>
+            <div className="flex-1 space-y-6 opacity-60">
+              <div className="inline-flex items-center space-x-2 bg-slate-100 border border-slate-200 rounded-full px-3 py-1">
+                <HeartPulse className="w-4 h-4 text-slate-500" />
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 04</span>
               </div>
-              <h2 className="text-3xl font-bold text-brand-dark">VitalSync: Cloud Analytics</h2>
-              <p className="text-brand-muted leading-relaxed">
-                VitalSync ingests high-frequency data from external IoT wearables alongside our vision telemetry to create a holistic physiological profile.
+              <div className="flex items-center space-x-3 text-slate-500">
+                <Lock className="w-6 h-6" />
+                <h2 className="text-3xl font-bold text-slate-700">Locked</h2>
+              </div>
+              <p className="text-slate-500 leading-relaxed max-w-md">
+                This module will be available in a future update.
               </p>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <HeartPulse className="w-5 h-5 text-rose-500 mt-1 mr-3 flex-shrink-0" />
-                  <p className="text-sm text-brand-dark"><strong>Sensor Fusion:</strong> Combines optical heart rate, HRV, and movement data to detect physiological stress.</p>
-                </li>
-                <li className="flex items-start">
-                  <Activity className="w-5 h-5 text-rose-500 mt-1 mr-3 flex-shrink-0" />
-                  <p className="text-sm text-brand-dark"><strong>Anomaly Detection:</strong> Triggers immediate alerts if patient vitals deviate from safe baseline thresholds.</p>
-                </li>
-              </ul>
             </div>
             <div className="flex-1 w-full">
-              <div className="glass-panel h-72 w-full rounded-2xl flex items-center justify-center bg-gradient-to-br from-rose-50 to-white">
-                 <HeartPulse className="w-24 h-24 text-rose-500 opacity-20" />
+              <div className="glass-panel h-72 w-full rounded-2xl flex items-center justify-center bg-gradient-to-br from-slate-50 to-white">
+                 <HeartPulse className="w-24 h-24 text-slate-400 opacity-20" />
               </div>
             </div>
           </div>
 
-          {/* Module 5: CarePredict */}
+          {/* Module 5: Placeholder */}
           <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="flex-1 space-y-6">
-              <div className="inline-flex items-center space-x-2 bg-emerald-50 border border-emerald-100 rounded-full px-3 py-1">
-                <Stethoscope className="w-4 h-4 text-emerald-500" />
-                <span className="text-xs font-bold text-emerald-600 uppercase tracking-wider">Module 05</span>
+            <div className="flex-1 space-y-6 opacity-60">
+              <div className="inline-flex items-center space-x-2 bg-slate-100 border border-slate-200 rounded-full px-3 py-1">
+                <Stethoscope className="w-4 h-4 text-slate-500" />
+                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Module 05</span>
               </div>
-              <h2 className="text-3xl font-bold text-brand-dark">CarePredict: ML Forecasting</h2>
-              <p className="text-brand-muted leading-relaxed">
-                Using Generative AI and deep learning, CarePredict analyzes historical session data to forecast recovery timelines and intelligently adjust care plans.
+              <div className="flex items-center space-x-3 text-slate-500">
+                <Lock className="w-6 h-6" />
+                <h2 className="text-3xl font-bold text-slate-700">Locked</h2>
+              </div>
+              <p className="text-slate-500 leading-relaxed max-w-md">
+                This module will be available in a future update.
               </p>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <Brain className="w-5 h-5 text-emerald-500 mt-1 mr-3 flex-shrink-0" />
-                  <p className="text-sm text-brand-dark"><strong>Generative LLMs:</strong> Uses AWS Bedrock and Claude to write human-readable clinical summaries automatically.</p>
-                </li>
-                <li className="flex items-start">
-                  <Stethoscope className="w-5 h-5 text-emerald-500 mt-1 mr-3 flex-shrink-0" />
-                  <p className="text-sm text-brand-dark"><strong>Trajectory Modeling:</strong> Predicts patient fatigue and suggests optimal rest periods before injury occurs.</p>
-                </li>
-              </ul>
             </div>
             <div className="flex-1 w-full">
-              <div className="glass-panel h-72 w-full rounded-2xl flex items-center justify-center bg-gradient-to-br from-emerald-50 to-white">
-                 <Stethoscope className="w-24 h-24 text-emerald-500 opacity-20" />
+              <div className="glass-panel h-72 w-full rounded-2xl flex items-center justify-center bg-gradient-to-br from-slate-50 to-white">
+                 <Stethoscope className="w-24 h-24 text-slate-400 opacity-20" />
               </div>
             </div>
           </div>
