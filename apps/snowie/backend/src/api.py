@@ -797,21 +797,35 @@ def parent_signup_endpoint(data: ParentSignupRequest):
     if not email:
         return {"status": "error", "message": "Email is required"}
     
-    db = Database(DB_PATH)
-    
-    # Check if user already exists
-    existing_user = db.get_user_by_email(email)
-    if existing_user:
-        return {"status": "error", "message": "User with this email already exists"}
+    # 1. AWS Cognito Signup
+    client = boto3.client('cognito-idp', region_name='us-east-1')
+    try:
+        response = client.sign_up(
+            ClientId='3fs7325brf1haha6kv61svrfr',
+            Username=email,
+            Password=data.password,
+            UserAttributes=[
+                {'Name': 'email', 'Value': email},
+                {'Name': 'name', 'Value': data.fullName}
+            ]
+        )
+        # Auto-confirm the user for this demo
+        client.admin_confirm_sign_up(
+            UserPoolId='us-east-1_HkWJMrLW1',
+            Username=email
+        )
+        user_sub = response['UserSub']
         
-    # Hash password
-    password_hash = hashlib.sha256(data.password.encode()).hexdigest()
+    except client.exceptions.UsernameExistsException:
+        return {"status": "error", "message": "User with this email already exists in AWS Cognito"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+    # 2. Sync to local SQLite for Foreign Keys
+    db = Database(DB_PATH)
+    db.create_user(user_sub, email, "aws_cognito_managed", data.fullName, "parent")
     
-    # Create user
-    user_id = "U-" + str(uuid.uuid4())[:8]
-    db.create_user(user_id, email, password_hash, data.fullName, "parent")
-    
-    # Calculate age roughly from DOB (YYYY-MM-DD)
+    # Calculate age roughly
     try:
         birth_year = int(data.childDob.split('-')[0])
         import datetime
@@ -828,9 +842,9 @@ def parent_signup_endpoint(data: ParentSignupRequest):
         'left': data.photoLeft,
         'right': data.photoRight
     }
-    db.create_participant(child_id, data.childName, age, data.fullName, user_id, photos)
+    db.create_participant(child_id, data.childName, age, data.fullName, user_sub, photos)
     
-    children = db.get_children_for_parent(user_id)
+    children = db.get_children_for_parent(user_sub)
     
     return {
         "status": "success",
@@ -838,7 +852,7 @@ def parent_signup_endpoint(data: ParentSignupRequest):
             "role":     "parent",
             "email":    email,
             "name":     data.fullName,
-            "token":    f"auth_tok_{user_id}_{int(time.time())}",
+            "token":    f"aws_token_{user_sub}_{int(time.time())}",
             "children": children,
         },
     }
@@ -853,37 +867,52 @@ def parent_login_endpoint(data: ParentLoginRequest):
     if not email:
         return {"status": "error", "message": "Email is required"}
     
+    # 1. AWS Cognito Authentication
+    client = boto3.client('cognito-idp', region_name='us-east-1')
+    try:
+        response = client.initiate_auth(
+            ClientId='3fs7325brf1haha6kv61svrfr',
+            AuthFlow='USER_PASSWORD_AUTH',
+            AuthParameters={
+                'USERNAME': email,
+                'PASSWORD': password
+            }
+        )
+        access_token = response['AuthenticationResult']['AccessToken']
+        
+        # Get user details to get the sub (UUID)
+        user_info = client.get_user(AccessToken=access_token)
+        user_sub = next((attr['Value'] for attr in user_info['UserAttributes'] if attr['Name'] == 'sub'), None)
+        username = next((attr['Value'] for attr in user_info['UserAttributes'] if attr['Name'] == 'name'), email)
+        
+    except client.exceptions.NotAuthorizedException:
+        return {"status": "error", "message": "Incorrect password"}
+    except client.exceptions.UserNotFoundException:
+        return {"status": "error", "message": "User not found in AWS Cognito"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+    # 2. Sync to local DB if not exists
     db = Database(DB_PATH)
-    
-    # Simple hash for prototype
-    password_hash = hashlib.sha256(password.encode()).hexdigest()
-    
     user = db.get_user_by_email(email)
     
     if not user:
-        # Auto-register
-        user_id = "U-" + str(uuid.uuid4())[:8]
-        username = email.split("@")[0].replace(".", " ").title()
-        db.create_user(user_id, email, password_hash, username, "parent")
-        
-        # Create a default child for the new parent
+        db.create_user(user_sub, email, "aws_cognito_managed", username, "parent")
         child_id = "P-" + str(uuid.uuid4())[:8]
-        db.create_participant(child_id, child_name, 6, username, user_id)
-        
-        user = {"id": user_id, "email": email, "name": username, "role": "parent"}
+        db.create_participant(child_id, child_name, 6, username, user_sub)
     else:
-        if user["password_hash"] != password_hash:
-            return {"status": "error", "message": "Invalid credentials"}
-    
-    children = db.get_children_for_parent(user["id"])
+        user_sub = user['id']
+        username = user['name']
+
+    children = db.get_children_for_parent(user_sub)
     
     return {
         "status": "success",
         "user": {
-            "role":     user["role"],
-            "email":    user["email"],
-            "name":     user["name"],
-            "token":    f"auth_tok_{user['id']}_{int(time.time())}",
+            "role":     "parent",
+            "email":    email,
+            "name":     username,
+            "token":    access_token,
             "children": children,
         },
     }
