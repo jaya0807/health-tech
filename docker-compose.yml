@@ -1,0 +1,42 @@
+services:
+  landing:
+    build:
+      context: ./apps/landing
+      args:
+        NEXT_PUBLIC_PHYSIO_URL: ${NEXT_PUBLIC_PHYSIO_URL:-http://localhost:3001}
+        NEXT_PUBLIC_SNOWIE_URL: ${NEXT_PUBLIC_SNOWIE_URL:-http://localhost:3002}
+    ports:
+      - "3000:3000"
+    restart: always
+
+  physio-ai:
+    build:
+      context: ./apps/physio-ai
+    ports:
+      - "3001:80"
+    restart: always
+
+  snowie-frontend:
+    build:
+      context: ./apps/snowie/frontend
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8000}
+    ports:
+      - "3002:3000"
+    depends_on:
+      - snowie-backend
+    restart: always
+
+  snowie-backend:
+    build:
+      context: ./apps/snowie/backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - snowie_data:/app/data
+    environment:
+      - DB_PATH=/app/data/observe.db
+    restart: always
+
+volumes:
+  snowie_data:

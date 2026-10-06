@@ -1,0 +1,17 @@
+{
+  "name": "health-tech",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NeuroPhys health-tech monorepo: landing hub, PhysioAI and Snowie",
+  "scripts": {
+    "install:all": "npm install --prefix apps/landing && npm install --prefix apps/physio-ai && npm install --prefix apps/snowie/frontend && python3 -m venv apps/snowie/backend/.venv && apps/snowie/backend/.venv/bin/pip install -r apps/snowie/backend/requirements.txt",
+    "dev": "concurrently -n landing,physio,snowie-ui,snowie-api -c blue,green,magenta,yellow \"npm:dev:landing\" \"npm:dev:physio\" \"npm:dev:snowie-ui\" \"npm:dev:snowie-api\"",
+    "dev:landing": "npm run dev --prefix apps/landing",
+    "dev:physio": "npm run dev --prefix apps/physio-ai",
+    "dev:snowie-ui": "npm run dev --prefix apps/snowie/frontend",
+    "dev:snowie-api": "cd apps/snowie/backend && .venv/bin/python -m uvicorn src.api:app --reload --port 8000"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
