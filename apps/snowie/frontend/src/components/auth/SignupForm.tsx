@@ -7,7 +7,6 @@ import { LoginCard } from "./LoginCard";
 import { Button } from "@/components/common/Button";
 import { ErrorMessage } from "@/components/common/ErrorMessage";
 import { useAuth } from "@/context/AuthContext";
-import { useAuth } from "@/context/AuthContext";
 import { ParentProfileFields } from "./ParentProfileFields";
 import { ChildProfileFields } from "./ChildProfileFields";
 
